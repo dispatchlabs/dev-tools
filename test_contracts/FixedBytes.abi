@@ -1,0 +1,21 @@
+[
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_amount",
+				"type": "bytes32"
+			}
+		],
+		"name": "returnBytes32Amount",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bytes32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	}
+]
