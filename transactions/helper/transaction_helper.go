@@ -48,7 +48,7 @@ func NewManualExecuteTx(toAddress string, method string, readOnly bool) *types.T
 		method,
 		GetParamsForMethod(method),
 		utils.ToMilliSeconds(time.Now()),
-		readOnly,
+//		readOnly,
 	)
 	return tx
 }

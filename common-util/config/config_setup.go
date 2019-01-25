@@ -31,6 +31,8 @@ func RefreshDisgoExecutable(baseDir string) {
 	if baseDir == "" {
 		baseDir = helper.GetDefaultDirectory()
 	}
+	fmt.Println("Base Dir:")
+	fmt.Println(baseDir)
 	err := BuildDisgoExecutable()
 	if err != nil {
 		panic(err)
@@ -97,11 +99,20 @@ func ClearDB(baseDir string) {
 }
 
 func BuildDisgoExecutable() error {
+	fmt.Println("BuildDisgoExecutable")
 	util.DeleteFile(fmt.Sprintf("%s/disgo", helper.GetDisgoDirectory()))
+
+	fmt.Println("getDisgoDirectory:")
+	fmt.Println(helper.GetDisgoDirectory())
+
 	helper.CheckCommand("go")
 	cmd := "go build -ldflags \"-X main.version=2.4.0 -X main.date=`date \"+%Y-%m-%d-%H:%M:%S\"` -X github.com/dispatchlabs/disgo/commons/types.Password=test\""
 	//cmd := "go build"
 	//cmd := "ls -al"
+
+	fmt.Println(cmd)
+
+
 	err := helper.ExecFromDir(cmd, helper.GetDisgoDirectory())
 	if err != nil {
 		utils.Error(err)

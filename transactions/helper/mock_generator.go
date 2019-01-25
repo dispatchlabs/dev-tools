@@ -51,7 +51,7 @@ func GetNewExecuteTxWithVarableParams(toAddress string, method string, args []st
 		method,
 		GetVariableParamsForContract(args),
 		utils.ToMilliSeconds(time.Now()),
-		readOnly,
+//		readOnly,
 	)
 	return tx
 }

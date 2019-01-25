@@ -105,13 +105,15 @@ func main() {
 	case "newLocalCluster":
 		var nbrDelegates int
 		var err error
+		genesisAccount := &types.Account{}
+		genesisAccount.Balance = big.NewInt(int64(1800000000000000000))
+		genesisAccount.Address = transactions.GenesisAddress
 		if len(flag.Args()) == 4 {
 			fmt.Printf("4 args")
 			nbrDelegates, err = strconv.Atoi(flag.Arg(1))
 			if err != nil {
 				utils.Error(err)
 			}
-			genesisAccount := &types.Account{}
 			genesisAccount.Address = flag.Arg(2)
 			val, err := strconv.Atoi(flag.Arg(3))
 			if err != nil {
@@ -127,10 +129,10 @@ func main() {
 			if err != nil {
 				utils.Error(err)
 			}
-			config.CleanAndBuildNewConfig(1, nbrDelegates, nil, true)
+			config.CleanAndBuildNewConfig(1, nbrDelegates, genesisAccount, true)
 		} else {
 			fmt.Printf("1 args")
-			config.CleanAndBuildNewConfig(1, 4, nil, true)
+			config.CleanAndBuildNewConfig(1, 4, genesisAccount, true)
 		}
 	case "makePrivateKey", "test":
 		createGenesisKeyAndAddress()

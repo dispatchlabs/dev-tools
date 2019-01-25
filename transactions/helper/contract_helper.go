@@ -76,7 +76,7 @@ func ExecuteContract(contractAddress string, method string, args []string, readO
 		contractAddress,
 		method,
 		params,
-		readOnly,
+//		readOnly,
 	)
 	if err != nil {
 		utils.Error(err)
