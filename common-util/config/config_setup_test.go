@@ -1,7 +1,7 @@
 package config
 
 import (
-	"github.com/dispatchlabs/tools/common-util/helper"
+	"github.com/dispatchlabs/dev-tools/common-util/helper"
 	"testing"
 )
 

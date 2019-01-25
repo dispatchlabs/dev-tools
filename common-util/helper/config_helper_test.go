@@ -2,7 +2,7 @@ package helper
 
 import (
 	"fmt"
-	"github.com/dispatchlabs/tools/common-util/configTypes"
+	"github.com/dispatchlabs/dev-tools/common-util/configTypes"
 	"testing"
 )
 

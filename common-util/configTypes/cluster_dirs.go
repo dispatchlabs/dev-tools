@@ -2,7 +2,7 @@ package configTypes
 
 import (
 	"fmt"
-	"github.com/dispatchlabs/tools/common-util/util"
+	"github.com/dispatchlabs/dev-tools/common-util/util"
 	"os"
 )
 

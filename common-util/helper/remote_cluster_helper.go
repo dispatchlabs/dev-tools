@@ -2,7 +2,7 @@ package helper
 
 import (
 	"github.com/dispatchlabs/disgo/commons/types"
-	"github.com/dispatchlabs/tools/common-util/configTypes"
+	"github.com/dispatchlabs/dev-tools/common-util/configTypes"
 )
 
 func GetNewRemoteConfigs(seedNodes, delegateNodes []*configTypes.NodeInfo) map[string]*configTypes.NodeInfo {

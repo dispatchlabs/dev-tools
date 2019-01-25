@@ -3,9 +3,9 @@ package config
 import (
 	"fmt"
 	"github.com/dispatchlabs/disgo/commons/utils"
-	"github.com/dispatchlabs/tools/common-util/configTypes"
-	"github.com/dispatchlabs/tools/common-util/helper"
-	"github.com/dispatchlabs/tools/common-util/util"
+	"github.com/dispatchlabs/dev-tools/common-util/configTypes"
+	"github.com/dispatchlabs/dev-tools/common-util/helper"
+	"github.com/dispatchlabs/dev-tools/common-util/util"
 	"io/ioutil"
 	"log"
 	"os"

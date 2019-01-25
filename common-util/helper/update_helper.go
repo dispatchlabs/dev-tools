@@ -2,7 +2,7 @@ package helper
 
 import (
 	"github.com/dispatchlabs/disgo/commons/utils"
-	"github.com/dispatchlabs/tools/common-util/util"
+	"github.com/dispatchlabs/dev-tools/common-util/util"
 	"fmt"
 )
 
