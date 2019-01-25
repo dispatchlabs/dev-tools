@@ -6,7 +6,7 @@ import (
 	"github.com/dispatchlabs/disgo/sdk"
 	"fmt"
 	"time"
-	"github.com/dispatchlabs/tools/transactions"
+	"github.com/dispatchlabs/dev-tools/transactions"
 )
 
 func GetReceipt(hash string) *types.Receipt {

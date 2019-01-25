@@ -3,7 +3,7 @@ package helper
 import (
 	"github.com/dispatchlabs/disgo/commons/utils"
 	"github.com/dispatchlabs/disgo/sdk"
-	"github.com/dispatchlabs/tools/transactions"
+	"github.com/dispatchlabs/dev-tools/transactions"
 	"time"
 	"github.com/dispatchlabs/disgo/commons/types"
 	"fmt"

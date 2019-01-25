@@ -5,7 +5,7 @@ import (
 	"github.com/dispatchlabs/disgo/commons/types"
 	"time"
 	"fmt"
-	"github.com/dispatchlabs/tools/transactions"
+	"github.com/dispatchlabs/dev-tools/transactions"
 )
 
 func NewTranferTx(toAddress string) *types.Transaction {

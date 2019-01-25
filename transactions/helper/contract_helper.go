@@ -5,10 +5,10 @@ import (
 	"github.com/dispatchlabs/disgo/commons/utils"
 	"github.com/dispatchlabs/disgo/commons/helper"
 	"github.com/dispatchlabs/disgo/sdk"
-	"github.com/dispatchlabs/tools/transactions"
+	"github.com/dispatchlabs/dev-tools/transactions"
 	"fmt"
 	"time"
-	"github.com/dispatchlabs/tools/common-util/util"
+	"github.com/dispatchlabs/dev-tools/common-util/util"
 	"github.com/pkg/errors"
 	"encoding/hex"
 )
