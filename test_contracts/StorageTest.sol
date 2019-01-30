@@ -3,13 +3,13 @@ pragma solidity ^0.4.24;
 
 
 contract StorageTest {
-  mapping (string => bytes) private _data;
+  mapping (string => string) private _data;
 
-  function get(string key) public view returns(bytes) {
+  function get(string key) public view returns(string) {
     return _data[key];
   }
 
-  function set(string key, bytes value) public returns(bool) {
+  function set(string key, string value) public returns(bool) {
     _data[key] = value;
 
     return true;
