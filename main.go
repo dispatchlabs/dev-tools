@@ -226,11 +226,11 @@ func main() {
 
 	case "executeContract":
 		if(len(flag.Args()) == 3) {
-			helper.ExecuteContract(flag.Arg(1), flag.Arg(2), nil, false)
+			helper.ExecuteContract(flag.Arg(1), flag.Arg(2), nil)
 		} else if(len(flag.Args()) > 3) {
-			helper.ExecuteContract(flag.Arg(1), flag.Arg(2), flag.Args()[3:], false)
+			helper.ExecuteContract(flag.Arg(1), flag.Arg(2), flag.Args()[3:])
 		} else {
-			helper.ExecuteContract("0b28be714a683eb119125ecb176724dcd701a597", "set", nil, false)
+			helper.ExecuteContract("0b28be714a683eb119125ecb176724dcd701a597", "set", nil)
 		}
 
 		//acct := helper.GetAccount(transactions.GenesisAddress)
@@ -244,20 +244,20 @@ func main() {
 		//}
 		//fmt.Printf("Account: %s\n%s\n", transactions.GenesisAddress, acct.ToPrettyJson())
 
-	case "executeContractReadOnly":
+	case "executeReadSmartContract":
 		if(len(flag.Args()) == 3) {
-			helper.ExecuteContract(flag.Arg(1), flag.Arg(2), nil, true)
+			helper.CallContract(flag.Arg(1), flag.Arg(2), nil)
 		} else if(len(flag.Args()) > 3) {
-			helper.ExecuteContract(flag.Arg(1), flag.Arg(2), flag.Args()[3:], true)
+			helper.CallContract(flag.Arg(1), flag.Arg(2), flag.Args()[3:])
 		} else {
-			helper.ExecuteContract("0b28be714a683eb119125ecb176724dcd701a597", "set", nil, true)
+			helper.CallContract("0b28be714a683eb119125ecb176724dcd701a597", "set", nil)
 		}
 	case "executeVarArgContract":
 		if len(os.Args) < 4 {
 			fmt.Println("executeVarArgContract must have at least 3 arguments")
 			break
 		}
-		helper.ExecuteContract(os.Args[2], os.Args[3], os.Args[4:], false)
+		helper.ExecuteContract(os.Args[2], os.Args[3], os.Args[4:])
 
 	case "deployAndExecute":
 		deployReceipt, err := helper.DeployContractFromFile(flag.Args()[1:])
@@ -267,7 +267,7 @@ func main() {
 		}
 		fmt.Printf("Deploy Receipt: \n%s\n", deployReceipt.ToPrettyJson())
 
-		executeReceipt, err := helper.ExecuteContract(deployReceipt.ContractAddress, flag.Arg(2), nil, false)
+		executeReceipt, err := helper.ExecuteContract(deployReceipt.ContractAddress, flag.Arg(2), nil)
 		if err != nil {
 			utils.Error(err)
 		}

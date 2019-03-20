@@ -61,7 +61,7 @@ func DeployContractFromFile(args []string) (*types.Receipt, error) {
 	return deployRcpt, nil
 }
 
-func ExecuteContract(contractAddress string, method string, args []string, readOnly bool) (*types.Receipt, error) {
+func ExecuteContract(contractAddress string, method string, args []string) (*types.Receipt, error) {
 	var params string
 	if args == nil {
 		params = GetParamsForMethod(method)
@@ -69,14 +69,13 @@ func ExecuteContract(contractAddress string, method string, args []string, readO
 		params = GetVariableParamsForContract(args)
 	}
 	utils.Info(fmt.Sprintf("executeContract --> \t%s\t%s\t%s", contractAddress, method, params))
-	hash, err := sdk.ExecuteSmartContractTransaction(
+	hash, err := sdk.ExecuteWriteTransaction(
 		GetRandomDelegate(transactions.SeedHost),
 		transactions.GenesisPrivateKey,
 		transactions.GenesisAddress,
 		contractAddress,
 		method,
 		params,
-//		readOnly,
 	)
 	if err != nil {
 		utils.Error(err)
@@ -85,6 +84,31 @@ func ExecuteContract(contractAddress string, method string, args []string, readO
 	execRcpt := GetReceipt(hash)
 
 	return execRcpt, nil
+}
+
+func CallContract(contractAddress string, method string, args []string) (*types.Receipt, error) {
+	var params string
+	if args == nil {
+		params = GetParamsForMethod(method)
+	} else {
+		params = GetVariableParamsForContract(args)
+	}
+	utils.Info(fmt.Sprintf("executeReadSmartContract --> \t%s\t%s\t%s", contractAddress, method, params))
+	receipt, err := sdk.ExecuteReadTransaction(
+		GetRandomDelegate(transactions.SeedHost),
+		transactions.GenesisPrivateKey,
+		transactions.GenesisAddress,
+		contractAddress,
+		method,
+		params,
+	)
+	if err != nil {
+		utils.Error(err)
+		return nil, err
+	} else {
+		return receipt, nil
+	}
+
 }
 
 
