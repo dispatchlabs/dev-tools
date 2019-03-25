@@ -28,15 +28,13 @@ contract TokenERC20 {
      *
      * Initializes contract with initial supply tokens to the creator of the contract
      */
-    constructor(
-        uint256 initialSupply,
-        string tokenName,
-        string tokenSymbol
-    ) public {
+    constructor() public {
+        uint256 initialSupply;
+        initialSupply = 50;
         totalSupply = initialSupply * 10 ** uint256(decimals);  // Update total supply with the decimal amount
         balanceOf[msg.sender] = totalSupply;                // Give the creator all initial tokens
-        name = tokenName;                                   // Set the name for display purposes
-        symbol = tokenSymbol;                               // Set the symbol for display purposes
+        name = "TESTED";                                   // Set the name for display purposes
+        symbol = "TST";                               // Set the symbol for display purposes
     }
     
     function get_sender() public view returns(address) {
