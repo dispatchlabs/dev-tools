@@ -20,6 +20,7 @@ import (
 	"bytes"
 	"io/ioutil"
 	"encoding/json"
+ 	"errors"
 )
 
 //var delay = time.Millisecond * 2
@@ -245,13 +246,21 @@ func main() {
 		//fmt.Printf("Account: %s\n%s\n", transactions.GenesisAddress, acct.ToPrettyJson())
 
 	case "executeReadSmartContract":
+		var receipt = new(types.Receipt)
+		var err = errors.New("")
 		if(len(flag.Args()) == 3) {
-			helper.CallContract(flag.Arg(1), flag.Arg(2), nil)
+			receipt, err = helper.CallContract(flag.Arg(1), flag.Arg(2), nil)
 		} else if(len(flag.Args()) > 3) {
-			helper.CallContract(flag.Arg(1), flag.Arg(2), flag.Args()[3:])
+			receipt, err = helper.CallContract(flag.Arg(1), flag.Arg(2), flag.Args()[3:])
 		} else {
-			helper.CallContract("0b28be714a683eb119125ecb176724dcd701a597", "set", nil)
+			receipt, err = helper.CallContract("0b28be714a683eb119125ecb176724dcd701a597", "set", nil)
 		}
+		if err != nil {
+			utils.Error(err)
+		} else {
+			utils.Info("Result: ", receipt)
+		}
+
 	case "executeVarArgContract":
 		if len(os.Args) < 4 {
 			fmt.Println("executeVarArgContract must have at least 3 arguments")
