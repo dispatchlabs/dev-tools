@@ -33,7 +33,7 @@ func GetTransaction(toAddress string) *types.Transaction {
 	return tx
 }
 
-func GetNewExecuteTxWithVarableParams(toAddress string, method string, args []string, readOnly bool) *types.Transaction {
+func GetNewExecuteTxWithVarableParams(toAddress string, method string, args []string, write bool) *types.Transaction {
 	utils.Info("GetNewExecuteTxWithVarableParams")
 	// Taken from Genesis
 	var privateKey = "0f86ea981203b26b5b8244c8f661e30e5104555068a4bd168d3e3015db9bb25a"
@@ -50,8 +50,8 @@ func GetNewExecuteTxWithVarableParams(toAddress string, method string, args []st
 		toAddress,
 		method,
 		GetVariableParamsForContract(args),
+		write,
 		utils.ToMilliSeconds(time.Now()),
-//		readOnly,
 	)
 	return tx
 }

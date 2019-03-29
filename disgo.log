@@ -1,7 +1,7 @@
-time="2018-12-10T15:41:13-08:00" level=info msg="executeContract --> \t45294d4b087e229ec95fc689d97ab66ac4eaed0a\ttest_staticcall_failure\t[]" method="main/tools/transactions/helper.ExecuteContract()"
-time="2018-12-10T15:41:16-08:00" level=info msg="Get Reciept" method="main/tools/transactions/helper.GetReceipt()"
-time="2018-12-10T15:41:21-08:00" level=info msg="Get Reciept" method="main/tools/transactions/helper.GetReceipt()"
- Reciept" method="main/tools/transactions/helper.GetReceipt()"
+time="2019-03-19T16:26:02-07:00" level=error msg="exit status 2" method="main/dev-tools/common-util/config.BuildDisgoExecutable()"
+7:00" level=error msg="InvalidTransaction: from address cannot equal to address" method="main/dev-tools/transactions/helper.sendHttpTransactions()"
+time="2019-03-13T17:22:00-07:00" level=error msg="Error getting Transaction for hash:  for delegate 3503invalid character '<' looking for beginning of value" method="main/dev-tools/transactions/helper.verifyTx()"
+
 time="2018-12-10T15:33:36-08:00" level=error msg="invalid character 'p' after top-level value" method="main/tools/transactions/helper.GetReceipt()"
 :13:47-08:00" level=error msg="invalid character 'p' after top-level value" method="main/tools/transactions/helper.GetReceipt()"
 nnection refused]" method="main/tools/transactions/helper.sendHttpTransactions()"

@@ -39,7 +39,7 @@ func NewManualDeployTx(code, abi string) *types.Transaction {
 	return tx
 }
 
-func NewManualExecuteTx(toAddress string, method string, readOnly bool) *types.Transaction {
+func NewManualExecuteTx(toAddress string, method string, write bool) *types.Transaction {
 	utils.Info("NewManualExecuteTx")
 	var tx, _ = types.NewExecuteContractTransaction(
 		transactions.GenesisPrivateKey,
@@ -47,8 +47,8 @@ func NewManualExecuteTx(toAddress string, method string, readOnly bool) *types.T
 		toAddress,
 		method,
 		GetParamsForMethod(method),
+		write,
 		utils.ToMilliSeconds(time.Now()),
-//		readOnly,
 	)
 	return tx
 }
