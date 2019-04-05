@@ -95,12 +95,13 @@ The **genesis account** that contains all of the tokens at the instantiation of 
 ## Sending Transactions
 
 The dev-tools repo comes with tools that can send any of the 4 transaction types to any network: 
-|Transaction  Type|What it does
-|--------|-------------------|
-|0|Divvy Token transfer|
-|1 |Deploy Smart-Contract|
-|2 |Execute Write|
-|3 |Execute Read|
+
+|Transaction  Type | What it does |
+|--------|----------------------|
+|0 |Divvy Token transfer |
+|1 |Deploy Smart-Contract |
+|2 |Execute Write |
+|3 |Execute Read |
 
 ### Pick a seed
 ```bat
