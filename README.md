@@ -57,12 +57,12 @@ To do any development on the Dispatch protocol, it really helps to be able to ru
 go run main.go newLocalCluster [numberOfDelegates (default=4)]
 ```
 The **newLocalCluster** command will build Seed and Delegate nodes in your `~/disgo_cluster` directory. Then go to these directories and start up the multiple nodes in multiple terminal windows, starting with the seed:
-```
+```bat
 cd ~/disgo_cluster/seed-0
 ./disgo
 ```
 Then from another teminal window:
-```
+```bat
 cd ~/disgo_cluster/delegate-0
 ./disgo
 ```
