@@ -235,7 +235,7 @@ func main() {
 		}
 		fmt.Printf("Receipt: \n%s\n", receipt.ToPrettyJson())
 
-	case "executeContract":
+	case "executeWrite":
 		fmt.Println(flag.Arg(1))
 		fmt.Println(flag.Arg(2))
 		fmt.Println(flag.Args()[3:])
@@ -249,18 +249,7 @@ func main() {
 			helper.ExecuteContract("0b28be714a683eb119125ecb176724dcd701a597", "set", nil, *seed)
 		}
 
-		//acct := helper.GetAccount(transactions.GenesisAddress)
-		//for i:= 0; i < 100; i++ {
-		//	time.Sleep(300 * time.Millisecond)
-		//	available, err := types.CheckMinimumAvailable(txn, services.GetCache(), fromAccount.Address, fromAccount.Balance.Uint64())
-		//	if err != nil {
-		//		utils.Error(err)
-		//	}
-		//	fmt.Printf(fmt.Sprintf("Hertz Balance is now: %d\n", available))
-		//}
-		//fmt.Printf("Account: %s\n%s\n", transactions.GenesisAddress, acct.ToPrettyJson())
-
-	case "executeReadSmartContract":
+	case "executeRead":
 		var receipt = new(types.Receipt)
 		var err = errors.New("")
 		if(len(flag.Args()) == 3) {
