@@ -1,3 +1,4 @@
+
 <img src="https://www.dispatchlabs.io/wp-content/uploads/2018/12/Dispatch_Logo.png" width="250">
  
 ![Go Version 1.10.3](http://b.repl.ca/v1/Go_Version-1.10.3-brightgreen.png)
@@ -15,29 +16,30 @@ If you have any questions or just want to get to know us better, come say hi [in
     + [Prerequisites](#prerequisites)
     + [Download](#download)
   * [Local Cluster](#local-cluster)
-      + [newLocalCluster](#newlocalcluster)
-      + [reset](#reset)
-      + [Configuring your local cluster](#configuring-your-local-cluster)
+      + [newLocalCluster](#-newlocalcluster)
+      + [reset](#-reset)
+      + [Configuring your local cluster](#-configuring-your-local-cluster)
   * [Sending Transactions](#sending-transactions)
-    + [Pick a seed](#pick-a-seed)
-    + [transfer](#transfer)
-    + [deployContractFromFile](#deploycontractfromfile)
-    + [executeWrite](#executewrite)
-    + [executeRead](#executeread)
+    + [Pick a seed](#-pick-a-seed)
+    + [transfer](#-transfer)
+    + [deployContractFromFile](#-deploycontractfromfile)
+    + [executeWrite](#-executewrite)
+    + [executeRead](#-executeread)
   * [Contributing!](#contributing)
 
+## Getting Started
 
-## Prerequisites:
+### Prerequisites:
 
-### Golang
+#### Golang
 
 Since both disgo and the dev-tools are written in go, it'll help if you [installed golang](https://golang.org/doc/install#install) on your machine
 
-### Branches
+#### Branches
 
 We try to keep our branch names connected between the disgo <--> dev-tools repos. If you're having a hard time building one or the other, make sure they're both on the same branch (dev and dev, or master and master).
 
-## Download:
+### Download:
 Go get the dev-tools
 ```bat
 go get github.com/dispatchlabs/dev-tools
@@ -52,7 +54,7 @@ go get ./...
 
 To do any development on the Dispatch protocol, it really helps to be able to run your own local cluster of Seeds and Delegates. 
 
-### newLocalCluster
+### 🆕 newLocalCluster 
 ```bat
 go run main.go newLocalCluster [numberOfDelegates (default=4)]
 ```
@@ -68,7 +70,7 @@ cd ~/disgo_cluster/delegate-0
 ```
 Rinse and repeat for as many Delegates as you'd like to run. 
 
-### reset
+### 🔥 reset
 ```bat
 go run main.go reset
 ```
@@ -77,7 +79,7 @@ The **reset** command will re-build the disgo binaries and empties the `db` fold
 
 *note: Reset will not empty or update the `config` folder.
 
-### Configuring your local cluster:
+### 🔧 Configuring your local cluster:
 |        |grpc Port          |http Port        |local Api         |
 |--------|-------------------|-----------------|------------------|
 |Seed	      |localhost:1973    |  Ø  | localhost:1975
@@ -103,13 +105,13 @@ The dev-tools repo comes with tools that can send any of the 4 transaction types
 |2 |Execute Write |
 |3 |Execute Read |
 
-### Pick a seed
+### 🌰 Pick a seed
 ```bat
 go run main.go -seed=devseed.dispatchlabs.io:1975 transfer [to-address] [amount]
 ```
 The dev-tools can send to **any network** with an active seed, but it will default to sending transactions to the local cluster. Just put the `-seed=*ip*:*port*` flag in front of the function name you want to call. The official Dispatch mainnet seed domain is static at seed.dispatchlabs.io and the devnet seed domain is devseed.dispatchlabs.io 
 
-### transfer
+### 💸 transfer
 ```bat
 go run main.go transfer [toAddress] [amount]
 ```
@@ -118,13 +120,13 @@ You can **transfer** tokens out of the genesis account defined in `dev-tools/tra
 go run main.go transfer [fromPrivKey] [fromAddress] [toAddress] [amount]
 ```
 
-### deployContractFromFile
+### 📑 deployContractFromFile
 ```bat
 go run main.go deployContractFromFile [contractName]
 ```
 This command will search the `dev-tools/test_contracts/` directory for a compiled [contractName].abi and [contractName].bin  and  **deploy** it from the genesis account.
 
-### executeWrite
+### 🖋 executeWrite
 ```bat
 go run main.go executeWrite [smartContractAddress] [function] [parameter0Type]:[parameter0Value] [parameter1Type]:[parameter1Value]...
 ```
@@ -132,7 +134,7 @@ go run main.go executeWrite [smartContractAddress] [function] [parameter0Type]:[
 
 Because executeWrite is needs to be gossipped and costs bandwidth, it is recommended to use the executeRead function whenever possible.
 
-### executeRead
+### 📚 executeRead
 ```bat
 go run main.go executeRead [smartContractAddress] [function] [parameter0Type]:[parameter0Value] [parameter1Type]:[parameter1Value]...
 ```
