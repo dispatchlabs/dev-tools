@@ -47,10 +47,15 @@ func main() {
 	//}
 	//fmt.Printf("version=%s, date=%s\n\n", version, date)
 
+	var delegate = flag.String("delegate", "", "please pass in a delegate ip")
+	var seed = flag.String("seed", "", "please pass in a seed ip")
 	flag.Parse()
 	functionToExecute := flag.Arg(0)
 	toAddress := "61c48d9a7838021b55cbaf70956e7e7470ad0c8e"
 
+
+	fmt.Println(*delegate)
+	fmt.Println(*seed)
 	fmt.Printf("Executing: %s\n", functionToExecute)
 	switch functionToExecute {
 	case "upgradeTx":
@@ -152,7 +157,12 @@ func main() {
 		if(len(flag.Args()) == 2) {
 			txCount, _ = strconv.Atoi(flag.Arg(1))
 		}
-		helper.RunTransferTokens(txCount, transactions.GenesisPrivateKey, transactions.GenesisAddress, toAddress, transactions.SeedHost, 1)
+		if (*seed == ""){
+			helper.RunTransferTokens(txCount, transactions.GenesisPrivateKey, transactions.GenesisAddress, toAddress, transactions.SeedHost, 1)
+		} else {
+			helper.RunTransferTokens(txCount, "a544cca72d88a49ec3afadc4a358125a138ad83b6fce72c1067b5773d8ae688f", "7bf5580620d91b55258a09dc9c1166f5542cc115", toAddress, *seed, 1)
+		}
+
 	case "transfer":
 		if(len(flag.Args()) == 5) {
 			privateKey := flag.Arg(1)
@@ -225,35 +235,29 @@ func main() {
 		}
 		fmt.Printf("Receipt: \n%s\n", receipt.ToPrettyJson())
 
-	case "executeContract":
+	case "executeWrite":
+		fmt.Println(flag.Arg(1))
+		fmt.Println(flag.Arg(2))
+		fmt.Println(flag.Args()[3:])
+
+
 		if(len(flag.Args()) == 3) {
-			helper.ExecuteContract(flag.Arg(1), flag.Arg(2), nil)
+			helper.ExecuteContract(flag.Arg(1), flag.Arg(2), nil, *seed)
 		} else if(len(flag.Args()) > 3) {
-			helper.ExecuteContract(flag.Arg(1), flag.Arg(2), flag.Args()[3:])
+			helper.ExecuteContract(flag.Arg(1), flag.Arg(2), flag.Args()[3:], *seed)
 		} else {
-			helper.ExecuteContract("0b28be714a683eb119125ecb176724dcd701a597", "set", nil)
+			helper.ExecuteContract("0b28be714a683eb119125ecb176724dcd701a597", "set", nil, *seed)
 		}
 
-		//acct := helper.GetAccount(transactions.GenesisAddress)
-		//for i:= 0; i < 100; i++ {
-		//	time.Sleep(300 * time.Millisecond)
-		//	available, err := types.CheckMinimumAvailable(txn, services.GetCache(), fromAccount.Address, fromAccount.Balance.Uint64())
-		//	if err != nil {
-		//		utils.Error(err)
-		//	}
-		//	fmt.Printf(fmt.Sprintf("Hertz Balance is now: %d\n", available))
-		//}
-		//fmt.Printf("Account: %s\n%s\n", transactions.GenesisAddress, acct.ToPrettyJson())
-
-	case "executeReadSmartContract":
+	case "executeRead":
 		var receipt = new(types.Receipt)
 		var err = errors.New("")
 		if(len(flag.Args()) == 3) {
-			receipt, err = helper.CallContract(flag.Arg(1), flag.Arg(2), nil)
+			receipt, err = helper.CallContract(flag.Arg(1), flag.Arg(2), nil, *seed)
 		} else if(len(flag.Args()) > 3) {
-			receipt, err = helper.CallContract(flag.Arg(1), flag.Arg(2), flag.Args()[3:])
+			receipt, err = helper.CallContract(flag.Arg(1), flag.Arg(2), flag.Args()[3:], *seed)
 		} else {
-			receipt, err = helper.CallContract("0b28be714a683eb119125ecb176724dcd701a597", "set", nil)
+			receipt, err = helper.CallContract("0b28be714a683eb119125ecb176724dcd701a597", "set", nil, *seed)
 		}
 		if err != nil {
 			utils.Error(err)
@@ -266,7 +270,7 @@ func main() {
 			fmt.Println("executeVarArgContract must have at least 3 arguments")
 			break
 		}
-		helper.ExecuteContract(os.Args[2], os.Args[3], os.Args[4:])
+		helper.ExecuteContract(os.Args[2], os.Args[3], os.Args[4:], *seed)
 
 	case "deployAndExecute":
 		deployReceipt, err := helper.DeployContractFromFile(flag.Args()[1:])
@@ -276,7 +280,7 @@ func main() {
 		}
 		fmt.Printf("Deploy Receipt: \n%s\n", deployReceipt.ToPrettyJson())
 
-		executeReceipt, err := helper.ExecuteContract(deployReceipt.ContractAddress, flag.Arg(2), nil)
+		executeReceipt, err := helper.ExecuteContract(deployReceipt.ContractAddress, flag.Arg(2), nil, *seed)
 		if err != nil {
 			utils.Error(err)
 		}
