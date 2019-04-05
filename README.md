@@ -10,6 +10,21 @@ This is the toolset developed for working on the [disgo](https://github.com/disp
 If you have any questions or just want to get to know us better, come say hi [in our discord](https://Dispatchlabs.io/discord) (https://Dispatchlabs.io/discord)
 
 
+## Table of Contents
+ * [Getting Started](#prerequisites)
+    + [Prerequisites](#prerequisites)
+    + [Download](#download)
+  * [Local Cluster](#local-cluster)
+      + [newLocalCluster](#newlocalcluster)
+      + [reset](#reset)
+      + [Configuring your local cluster](#configuring-your-local-cluster)
+  * [Sending Transactions](#sending-transactions)
+    + [Pick a seed](#pick-a-seed)
+    + [transfer](#transfer)
+    + [deployContractFromFile](#deploycontractfromfile)
+    + [executeWrite](#executewrite)
+    + [executeRead](#executeread)
+  * [Contributing!](#contributing)
 
 
 ## Prerequisites:
@@ -62,7 +77,7 @@ The **reset** command will re-build the disgo binaries and empties the `db` fold
 
 *note: Reset will not empty or update the `config` folder.
 
-### Configuring to your local cluster:
+### Configuring your local cluster:
 |        |grpc Port          |http Port        |local Api         |
 |--------|-------------------|-----------------|------------------|
 |Seed	      |localhost:1973    |  Ø  | localhost:1975
