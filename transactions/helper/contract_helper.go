@@ -29,7 +29,7 @@ func DeployContract(contractCode, abi string) (*types.Receipt, error) {
 	return deployRcpt, nil
 }
 
-func DeployContractFromFile(args []string) (*types.Receipt, error) {
+func DeployContractFromFile(args []string, seed string) (*types.Receipt, error) {
 	if len(args) != 2 {
 		return nil, errors.New("deployContractFromFile needs a binary file (arg 1) and abi file (arg 2)")
 	}
@@ -43,10 +43,15 @@ func DeployContractFromFile(args []string) (*types.Receipt, error) {
 		return nil, err
 	}
 
+	//set seed to localhost if not passed in
+	if seed == "" {
+		seed = transactions.SeedHost
+	}
+
 	printAbiMethodsAndParams(abi)
 
 	deployHash, err := sdk.DeploySmartContract(
-		GetRandomDelegate(transactions.SeedHost),
+		GetRandomDelegate(seed),
 		transactions.GenesisPrivateKey,
 		transactions.GenesisAddress,
 		string(code),
@@ -61,16 +66,22 @@ func DeployContractFromFile(args []string) (*types.Receipt, error) {
 	return deployRcpt, nil
 }
 
-func ExecuteContract(contractAddress string, method string, args []string) (*types.Receipt, error) {
+func ExecuteContract(contractAddress string, method string, args []string, seed string) (*types.Receipt, error) {
 	var params string
 	if args == nil {
 		params = GetParamsForMethod(method)
 	} else {
 		params = GetVariableParamsForContract(args)
 	}
+
+	//set seed to localhost if not passed in
+	if seed == "" {
+		seed = transactions.SeedHost
+	}
+
 	utils.Info(fmt.Sprintf("executeContract --> \t%s\t%s\t%s", contractAddress, method, params))
 	hash, err := sdk.ExecuteWriteTransaction(
-		GetRandomDelegate(transactions.SeedHost),
+		GetRandomDelegate(seed),
 		transactions.GenesisPrivateKey,
 		transactions.GenesisAddress,
 		contractAddress,
@@ -86,16 +97,22 @@ func ExecuteContract(contractAddress string, method string, args []string) (*typ
 	return execRcpt, nil
 }
 
-func CallContract(contractAddress string, method string, args []string) (*types.Receipt, error) {
+func CallContract(contractAddress string, method string, args []string, seed string) (*types.Receipt, error) {
 	var params string
 	if args == nil {
 		params = GetParamsForMethod(method)
 	} else {
 		params = GetVariableParamsForContract(args)
 	}
+
+	//set seed to localhost if not passed in
+	if seed == "" {
+		seed = transactions.SeedHost
+	}
+
 	utils.Info(fmt.Sprintf("executeReadSmartContract --> \t%s\t%s\t%s", contractAddress, method, params))
 	receipt, err := sdk.ExecuteReadTransaction(
-		GetRandomDelegate(transactions.SeedHost),
+		GetRandomDelegate(seed),
 		transactions.GenesisPrivateKey,
 		transactions.GenesisAddress,
 		contractAddress,

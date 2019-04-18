@@ -221,14 +221,14 @@ func main() {
 			files := make([]string, 2)
 			files[0] = fmt.Sprintf("test_contracts/%s.bin", flag.Args()[1])
 			files[1] = fmt.Sprintf("test_contracts/%s.abi", flag.Args()[1])
-			receipt, err = helper.DeployContractFromFile(files)
+			receipt, err = helper.DeployContractFromFile(files, *seed)
 		} else if(len(flag.Args()) == 3) {
-			receipt, err = helper.DeployContractFromFile(flag.Args()[1:])
+			receipt, err = helper.DeployContractFromFile(flag.Args()[1:], *seed)
 		} else {
 			files := make([]string, 2)
 			files[0] = "test_contracts/Uint256Test.bin"
 			files[1] = "test_contracts/Uint256Test.abi"
-			receipt, err = helper.DeployContractFromFile(files)
+			receipt, err = helper.DeployContractFromFile(files, *seed)
 		}
 		if err != nil {
 			utils.Error(err)
@@ -273,7 +273,7 @@ func main() {
 		helper.ExecuteContract(os.Args[2], os.Args[3], os.Args[4:], *seed)
 
 	case "deployAndExecute":
-		deployReceipt, err := helper.DeployContractFromFile(flag.Args()[1:])
+		deployReceipt, err := helper.DeployContractFromFile(flag.Args()[1:], *seed)
 		if err != nil {
 			utils.Error(err)
 			return
